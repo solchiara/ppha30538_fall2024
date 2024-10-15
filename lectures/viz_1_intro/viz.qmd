@@ -8,6 +8,8 @@ format:
     echo: true
     toc: true
 ---
+
+```{=html}
 <!--
     beamer:
         echo: true
@@ -17,16 +19,15 @@ format:
         header-includes: \renewcommand{\tightlist}{\setlength{\itemsep}{5ex}\setlength{\parskip}{0pt}}
             \setbeamertemplate{footline}[frame number] 
             -->
-
-
+```
 # Introduction to Vega-Lite
 
 ## Roadmap
 
-* Textbook
-* What's different from `matplotlib`?
-* What is Vega and Vega-Lite?
-* First plot -- image and then grammar
+-   Textbook
+-   What's different from `matplotlib`?
+-   What is Vega and Vega-Lite?
+-   First plot -- image and then grammar
 
 ## Citing our sources
 
@@ -38,11 +39,11 @@ https://idl.uw.edu/visualization-curriculum/
 
 Our old friend `matplotlib` is "imperative" meaning that you tell the computer what to do. Implement the visualization in terms of for-loops, low-level drawing commands.
 
-Good graphics packages are *declarative*, we mean that you can provide a high-level specification of *what* you want in the visualization. Three inputs 
+Good graphics packages are *declarative*, we mean that you can provide a high-level specification of *what* you want in the visualization. Three inputs
 
-* data 
-* graphical marks 
-* encoding channels
+-   data
+-   graphical marks
+-   encoding channels
 
 We are going to use Vega-Lite + Altair in this class.
 
@@ -56,34 +57,36 @@ A good grammar should be easy to use and clear (unlike English...).
 
 New vocabulary:
 
-* Vega is a sophisticated grammar
-* Vega-Lite is a more simple grammar
-* [JSON (JavaScript Object Notation)](https://en.wikipedia.org/wiki/JSON) is used to record Vega and Vega-Lite specifications
-* Altair is an API enabling Python to write Vega-Lite
+-   Vega is a sophisticated grammar
+-   Vega-Lite is a more simple grammar
+-   [JSON (JavaScript Object Notation)](https://en.wikipedia.org/wiki/JSON) is used to record Vega and Vega-Lite specifications
+-   Altair is an API enabling Python to write Vega-Lite
 
 ## The declarative approach w/ altair vs. imperative w/ matplotlib
-![](pictures/altair_v_matplotlib.png){ width=100% fig-align="center"}
 
-* When using a **declarative approach**, your Python code tells `altair` how you want to visualize the data and it writes Vega/Vega-lite to "draw" the graph
-* When using an **imperative approach**, your Python code tells `matplotlib` directly how to "draw" the graph 
+![](pictures/altair_v_matplotlib.png){width="100%" fig-align="center"}
+
+-   When using a **declarative approach**, your Python code tells `altair` how you want to visualize the data and it writes Vega/Vega-lite to "draw" the graph
+-   When using an **imperative approach**, your Python code tells `matplotlib` directly how to "draw" the graph
 
 ## Other declarative graphics packages
 
-| # | package | what it is 
-| --- | --- | --- | 
-| 1 |  `seaborn` | a wrapper for `matplotlib` to make it easier to use |
-| 2 | `plotly` | Designed for apps and dashboards. Some features cost $. | 
-| 3 | `bokeh` | Designed for apps and dashboards. |
-| 4 | `plotnine` | an exact clone of `ggplot2` | 
+| \#  | package    | what it is                                               |
+|-----|------------|----------------------------------------------------------|
+| 1   | `seaborn`  | a wrapper for `matplotlib` to make it easier to use      |
+| 2   | `plotly`   | Designed for apps and dashboards. Some features cost \$. |
+| 3   | `bokeh`    | Designed for apps and dashboards.                        |
+| 4   | `plotnine` | an exact clone of `ggplot2`                              |
 
 Why did we choose Altair and not one of these?
 
-1. Makes beautiful plots, but under the hood it has all the problems that `matplotlib` does
-2. We wanted something that was also good for static graphics. Not entirely free.
-3. See above.
-4. It doesn't make sense for your "main" plotting language in Python to be a crude port of something from R.
+1.  Makes beautiful plots, but under the hood it has all the problems that `matplotlib` does
+2.  We wanted something that was also good for static graphics. Not entirely free.
+3.  See above.
+4.  It doesn't make sense for your "main" plotting language in Python to be a crude port of something from R.
 
 ## Installation
+
 ```{bash}
 pip install altair
 pip install vega_datasets
@@ -91,8 +94,8 @@ pip install vega_datasets
 
 <!-- PG to SSS/GGG a huge number of students thought that this was a command that they run in th python interpreter rather than a command that they run at the terminal. need more detail/explanation.-->
 
+## My first plot -- image
 
-## My first plot -- image 
 ```{python}
 #| echo: false 
 import altair as alt
@@ -106,9 +109,8 @@ alt.Chart(df).mark_bar().encode(
 
 [source](https://vega.github.io/vega-lite/#example).
 
-
-
 ## My first plot -- grammar
+
 ```{json}
 {
   "data": {"url": "data/seattle-weather.csv"},
@@ -120,23 +122,21 @@ alt.Chart(df).mark_bar().encode(
 }
 ```
 
-* This is designed to be readable for both a human and for Vega. Pretty cool!
+-   This is designed to be readable for both a human and for Vega. Pretty cool!
 
 Discussion question: what does each line of text mean?
 
-
 ## Why the emphasis on grammar?
-* Packages for doing graphics and coding languages change over time
-* We chose to teach a package with an underlying grammar because we are trying to foreground the conceptual aspects of data visualization
-* This will hopefully teach you insights that are portable, even as which language you or your staff choose to work in change over time
 
+-   Packages for doing graphics and coding languages change over time
+-   We chose to teach a package with an underlying grammar because we are trying to foreground the conceptual aspects of data visualization
+-   This will hopefully teach you insights that are portable, even as which language you or your staff choose to work in change over time
 
 ## Summary
 
-* Use a declarative approach
-* Grammar: Vega
-* Gives a coherent conceptual representation underlying a plot
-
+-   Use a declarative approach
+-   Grammar: Vega
+-   Gives a coherent conceptual representation underlying a plot
 
 # Introduction to Altair and datasets
 
@@ -146,9 +146,8 @@ Altair is a Python [API (Application Programming Interface)](https://en.wikipedi
 
 Roadmap:
 
-* Load package
-* Load data
-
+-   Load package
+-   Load data
 
 ## Imports and Renderer
 
@@ -169,15 +168,16 @@ cars = vega_data.cars()
 cars.head()  
 ```
 
-
 ## Vega_datasets formatted for JSON
+
 ```{python}
 #URL if you want 
 vega_data.cars.url
 ```
 
 What you will see if you go to this link
-```
+
+```         
    {
       "Name":"chevrolet chevelle malibu",
       "Miles_per_Gallon":18,
@@ -194,7 +194,9 @@ What you will see if you go to this link
 Looks less familiar (and more repetitive). Just use `pd.read_json(data.cars.url)` to convert to tabular
 
 ## Weather Data
+
 Statistical visualization in Altair begins with ["tidy"](http://vita.had.co.nz/papers/tidy-data.html) data frames. Here, we'll start by creating a simple data frame (`df`) containing the average precipitation (`precip`) for a given `city` and `month` :
+
 ```{python}
 df = pd.DataFrame({
     'city': ['Seattle', 'Seattle', 'Seattle', 'New York', 'New York', 'New York', 'Chicago', 'Chicago', 'Chicago'],
@@ -207,38 +209,40 @@ df
 
 ## Summary
 
-* Altair is an API that enables Python to "speak" in Vega-Lite's grammar
-* Datasets: cars, weather
+-   Altair is an API that enables Python to "speak" in Vega-Lite's grammar
+-   Datasets: cars, weather
 
 # Building a first chart
 
 ## Building a first chart: roadmap
-* incrementally build our first chart
-* then build our first aggregated chart
+
+-   incrementally build our first chart
+-   then build our first aggregated chart
 
 ## The `Chart` object
+
 ```{python}
 chart = alt.Chart(df)
 ```
 
-
 ## A single point
+
 ```{python}
 alt.Chart(df).mark_point()
 ```
 
-
 Actually this is many points all located in the same place
 
 ## One point per city on y-axis
+
 ```{python}
 alt.Chart(df).mark_point().encode(
   alt.Y('city')
 )
 ```
 
-
 ## xy coordinates
+
 ```{python}
 alt.Chart(df).mark_point().encode(
   alt.X('precip'),
@@ -248,14 +252,14 @@ alt.Chart(df).mark_point().encode(
 
 Process: Code is super-duper readable.
 
-Substance: _Seattle exhibits both the least-rainiest and most-rainiest months!_
+Substance: *Seattle exhibits both the least-rainiest and most-rainiest months!*
 
 <!-- PG note to self: textbook then discusses encoding but provides no explanation for why this is useful or appropriate. I am skipping it entirely for now, can revisit it later -->
 
 <!-- MS note to self: check if the order in which `mark_point() and `encode()` go matters. -->
 
-
 ## Data Transformation: Aggregation
+
 ```{python}
 alt.Chart(df).mark_point().encode(
   alt.X('average(precip)'),
@@ -264,13 +268,13 @@ alt.Chart(df).mark_point().encode(
 ```
 
 ## Bar plot
+
 ```{python}
 alt.Chart(df).mark_bar().encode(
     alt.X('average(precip)'),
     alt.Y('city')
 )
 ```
-
 
 ## Syntax: Understanding Altair's shorthands.
 
@@ -298,9 +302,6 @@ alt.Chart(df).mark_point(color='firebrick').encode(
 )
 ```
 
-
-
-
 ## Customizing a visualization -- log scale
 
 ```{python}
@@ -310,13 +311,12 @@ alt.Chart(df).mark_point(color='firebrick').encode(
 )
 ```
 
-
 ## Building a first chart: summary
 
-* Everything begins with a `Chart(data)`
-* Every `Chart` needs a `mark`
-* Every `Chart` needs guidance how to encode the data in terms of `mark`s
-* Simple chart formatting: `mark_point(color='firebrick')`, `axis=alt.Axis(title=...)`, `scale=alt.Scale(type='log')`
+-   Everything begins with a `Chart(data)`
+-   Every `Chart` needs a `mark`
+-   Every `Chart` needs guidance how to encode the data in terms of `mark`s
+-   Simple chart formatting: `mark_point(color='firebrick')`, `axis=alt.Axis(title=...)`, `scale=alt.Scale(type='log')`
 
 ## Data Transformation: Do-pair-share
 
@@ -324,14 +324,13 @@ Make a bar plot showing the **lowest** rainfall for each city in the dataset.
 
 Hint: Altair's aggregation methods are [here](https://altair-viz.github.io/user_guide/encodings/index.html#aggregation-functions)
 
-
-# Multiple Views 
+# Multiple Views
 
 ## Multiple Views: roadmap
 
-* introduce `mark_line()`
-* line + `mark_circle()` on one panel
-* multiple panels
+-   introduce `mark_line()`
+-   line + `mark_circle()` on one panel
+-   multiple panels
 
 ## `mark_line()`
 
@@ -358,7 +357,6 @@ point = alt.Chart(cars).mark_circle().encode(
 line + point
 ```
 
-
 ## Multiple Marks -- the short way
 
 ```{python}
@@ -380,8 +378,8 @@ alt.Chart(cars).mark_line(point=True).encode(
 )
 ```
 
+## Multiple Panels
 
-## Multiple Panels 
 ```{python}
 hp = alt.Chart(cars).mark_line().encode(
     alt.X('Year'),
@@ -393,29 +391,28 @@ hp = alt.Chart(cars).mark_line().encode(
 
 ## Multiple Views -- summary
 
-* `mark_line() + mark_point()` or `mark_line(point=True)`
-* `plot1 | plot2` for side-by-side
+-   `mark_line() + mark_point()` or `mark_line(point=True)`
+-   `plot1 | plot2` for side-by-side
 
 Note: this is just a preview, we will do a lot more on multiple views in lecture 6 (textbook's chapter 5).
 
 # Under the hood: JSON
 
-
 ## roadmap
 
-* Beauty of JSON
-* Teach how Altair writes JSON via three cumulative examples
-* More syntax for working with JSON
-* In-class exercise
+-   Beauty of JSON
+-   Teach how Altair writes JSON via three cumulative examples
+-   More syntax for working with JSON
+-   In-class exercise
 
 ## The beauty of JSON
 
 "JSON Schema is the vocabulary that enables JSON data consistency, validity, and interoperability at scale."
 
-Documents that are 
+Documents that are
 
-* hierarchical (unlike tables)
-* interpretable for humans and computers
+-   hierarchical (unlike tables)
+-   interpretable for humans and computers
 
 https://vega.github.io/schema/vega-lite/v5.json
 
@@ -443,18 +440,18 @@ https://vega.github.io/schema/vega-lite/v5.json
       "type": "string"
 ```
 
-
 ## example 1: snippet from Altair
 
 Altair can best be thought of as a language translator. It writes JSON for you. More specifically, it writes JSON which complies with the grammar rules laid out by Vega-Lite.
+
 ```{python}
 #python altair object. will explain :Q in next lecture
 x = alt.X('average(precipitation):Q') 
 print(x.to_json())                  
 ```
 
-
 ## example 2: longer snippet from Altair
+
 ```{python}
 chart = alt.Chart().mark_point().encode(
     alt.X('average(precipitation):Q'),
@@ -464,6 +461,7 @@ print(chart.to_json())
 ```
 
 ## Example 3: add `df` to make the bar plot from earlier in lecture
+
 ```{python}
 chart = alt.Chart(df).mark_point().encode(
     alt.X('average(precip)'),
@@ -473,6 +471,7 @@ print(chart.to_json())
 ```
 
 ## syntax: `keys()`
+
 ```{python}
 import json
 chart_as_string = chart.to_json()
@@ -480,19 +479,16 @@ chart = json.loads(chart_as_string)
 chart.keys()
 ```
 
-
 ## extract dataset
 
 ```{python}
 chart.get("datasets")
 ```
 
-
 ## in-class exercise
 
-1. extract `chart`'s encoding.
-2. extract just the encoding for `x`
-
+1.  extract `chart`'s encoding.
+2.  extract just the encoding for `x`
 
 ## summary
 
